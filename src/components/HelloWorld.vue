@@ -4,6 +4,9 @@
     <h2>Essential Links</h2>
     <ul>
       <li>
+        <router-link :to="{path : '/login'}" class="navbar-brand">LOGIN - ROUTER</router-link>
+      </li>
+      <li>
         <a
           href="https://vuejs.org"
           target="_blank"

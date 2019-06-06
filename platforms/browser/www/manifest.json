@@ -1,11 +1,11 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "helloworld",
-  "short_name": "helloworld",
+  "name": "Datapro",
+  "short_name": "Datapro",
   "version": "com.datapro.fichaje",
   "description": "Hello World sample application that responds to the deviceready event.",
-  "author": "PhoneGap Team",
+  "author": "Datapro",
   "icons": [],
-  "start_url": "dist/index.html"
+  "start_url": "www/dist/index.html"
 }
