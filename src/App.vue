@@ -7,7 +7,7 @@
               <img src="https://dataprolegal.com/wp-content/uploads/2018/06/Logo-comunidad_3.png" width="auto" height="45px" class="d-inline-block" />
             </router-link>
             
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
   
