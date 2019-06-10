@@ -36,6 +36,9 @@
     },
     "cordova-plugin-vibration": {
       "PACKAGE_NAME": "com.datapro.fichaje"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.datapro.fichaje"
     }
   },
   "dependent_plugins": {
