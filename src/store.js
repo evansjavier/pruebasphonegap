@@ -8,17 +8,16 @@ export default new Vuex.Store({
   state: {
     status: '',
     token: localStorage.getItem('token') || '',
-    user : {}
+    user : localStorage.getItem('user') || {}
   },
   mutations: {
-    mutations: {
       auth_request(state){
         state.status = 'loading'
       },
-      auth_success(state, token, user){
-        state.status = 'success'
-        state.token = token
-        state.user = user
+      auth_success(state, data) {
+            state.status = 'success'
+            state.token = data.token
+            state.user = data.user
       },
       auth_error(state){
         state.status = 'error'
@@ -26,7 +25,6 @@ export default new Vuex.Store({
       logout(state){
         state.status = ''
         state.token = ''
-      },
     },
   },
   actions: {
@@ -35,14 +33,24 @@ export default new Vuex.Store({
               commit('auth_request')
               axios({url: API.login, data: user, method: 'POST' })
               .then(resp => {
+
                 const token = resp.data.access_token
                 const user = resp.data.user
                 localStorage.setItem('token', token)
+                localStorage.setItem('user', JSON.stringify(user))
+                
+                // Add the following line:
                 axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-                commit('auth_success', token, user)
+                
+                commit('auth_success', { token : resp.data.access_token, user : resp.data.user })
+                
+                
                 resolve(resp)
+
               })
               .catch(err => {
+                console.log("STORE: login error")
+                
                 commit('auth_error')
                 localStorage.removeItem('token')
                 reject(err)
@@ -53,6 +61,7 @@ export default new Vuex.Store({
           return new Promise((resolve, reject) => {
             commit('logout')
             localStorage.removeItem('token')
+            localStorage.removeItem('user')
             delete axios.defaults.headers.common['Authorization']
             resolve()
           })
@@ -61,5 +70,10 @@ export default new Vuex.Store({
   getters : {
       isLoggedIn: state => !!state.token,
       authStatus: state => state.status,
+      user: state => {
+        return (typeof state.user == typeof '') ? 
+          JSON.parse(state.user) :
+          state.user
+      },
   }
 })

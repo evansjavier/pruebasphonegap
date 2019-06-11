@@ -3,7 +3,11 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
           
-            <router-link :to="{path : '/schedule'}" class="navbar-brand">
+            <router-link v-if="isLoggedIn" :to="{path : '/schedule'}" class="nav-link">
+              <img src="https://dataprolegal.com/wp-content/uploads/2018/06/Logo-comunidad_3.png" width="auto" height="45px" class="d-inline-block" />
+            </router-link>
+                      
+            <router-link v-else :to="{path : '/login'}" class="navbar-brand">
               <img src="https://dataprolegal.com/wp-content/uploads/2018/06/Logo-comunidad_3.png" width="auto" height="45px" class="d-inline-block" />
             </router-link>
             
@@ -12,12 +16,23 @@
             </button>
   
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                       
-                     <li class="nav-item" v-if="isLoggedIn">
-                          <router-link :to="{path : '/schedule-records-index'}" class="nav-link">
+                      <li class="nav-item" v-if="isLoggedIn">
+                          <router-link :to="{path : '/schedule'}" class="nav-link">
+                            Fichar
+                          </router-link>
+                      </li>
+                      <li class="nav-item" v-if="isLoggedIn">
+                          <router-link :to="{name : 'schedule-records'}" class="nav-link">
                             Fichas
+                          </router-link>
+                      </li>
+                      <li class="nav-item" v-if="isLoggedIn">
+                          <router-link :to="{name : 'work-reports' }" class="nav-link">
+                            Reportes
                           </router-link>
                       </li>
                 </ul>
@@ -25,24 +40,22 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
-                    
-                        <li class="nav-item" v-if="!isLoggedIn">
-                            <router-link :to="{name : 'login'}" class="nav-link">
-                              Login
-                            </router-link>
-                        </li>
-                    
-                        <li class="nav-item dropdown" v-else>
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                USERNAME <span class="caret"></span>
+                    <li class="nav-item dropdown" v-if="isLoggedIn">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ (currentUser && currentUser.name) || 'usuario' }} <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#" @click.prevent="logout">
+                                Cerrar sesión
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#" @click.prevent="logout">
-                                    Cerrar sesión
-                                </a>
-                            </div>
-                        </li>
-                    
+                        </div>
+                    </li>
+                
+                    <li class="nav-item" v-else>
+                        <router-link :to="{name : 'login'}" class="nav-link">
+                          Login
+                        </router-link>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -50,7 +63,7 @@
     <main class="py-4">
         <div class="container">
             <div class="row">
-                <div class="col-md-8 offset-md-2">
+                <div class="col-sm-12 col-md-10 offset-md-1">
                     <div class="alert-container"></div>
                     <router-view/>
                 </div>
@@ -65,7 +78,8 @@
   
     export default {
     computed : {
-      isLoggedIn : function(){ return this.$store.getters.isLoggedIn}
+      isLoggedIn : function(){ return this.$store.getters.isLoggedIn },
+      currentUser: function(){ return this.$store.getters.user }
     },
     methods: {
       logout: function () {
@@ -97,7 +111,6 @@
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 

@@ -11,10 +11,10 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">Correo electrónico</label>
     
                             <div class="col-md-6">
-                                <input v-model="email" id="email" type="email" class="form-control" :class="{'is-invalid' : errors.email.lenght }" name="email" required autocomplete="email" autofocus>
+                                <input v-model="email" id="email" type="email" class="form-control" :class="{'is-invalid' : errors.email.length }" name="email"  autocomplete="email" required autofocus>
     
                                 <span v-for="error in errors.email" class="invalid-feedback" role="alert">
-                                    <strong>{{ $error }}</strong>
+                                    <strong>{{ error }}</strong>
                                 </span>
                             </div>
                         </div>
@@ -23,10 +23,10 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">Contraseña</label>
     
                             <div class="col-md-6">
-                                <input v-model="password" id="password" type="password" class="form-control" :class="{'is-invalid' : errors.password.lenght }" name="password" required autocomplete="current-password">
+                                <input v-model="password" id="password" type="password" class="form-control" :class="{'is-invalid' : errors.password.length }" name="password" required autocomplete="current-password">
     
-                                <span v-for="error in errors.email" class="invalid-feedback" role="alert">
-                                    <strong>{{ $error }}</strong>
+                                <span v-for="error in errors.password" class="invalid-feedback" role="alert">
+                                    <strong>{{ error }}</strong>
                                 </span>
                             </div>
                         </div>
@@ -39,6 +39,9 @@
                                     <label class="form-check-label" for="remember">
                                         Recuérdame
                                     </label>
+                                    <span v-for="error in errors.remember_me" class="invalid-feedback" role="alert">
+                                    <strong>{{ error }}</strong>
+                                </span>
                                 </div>
                             </div>
                         </div>
@@ -78,9 +81,33 @@
       login: function () {
         let email = this.email 
         let password = this.password
+        let self = this;
+        
         this.$store.dispatch('login', { email, password })
-       .then(() => this.$router.push('/schedule'))
-       .catch(err => console.log(err))
+       .then(() => 
+            this.$router.push('/schedule'))
+       
+       .catch(function(err){
+           
+            let resp_err = err.response.data.errors;
+            
+            if(err.response.status == 422 && resp_err){
+                if( resp_err.email )
+                    self.errors.email = resp_err.email
+                if( resp_err.password )
+                    self.errors.password = resp_err.password
+                if( resp_err.remember_me )
+                    self.errors.remember_me = resp_err.remember_me
+            }
+            else if(err.response.status == 401){
+                self.errors.email = ['Estas credenciales no coinciden con nuestros registros.']
+                self.password = ""
+            }
+            else{
+                alert("Hubo un error, por favor intente más tarde...")
+            }
+       })
+           
       }
     }
   }
