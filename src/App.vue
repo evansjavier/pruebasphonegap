@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
           
-            <router-link :to="{path : '/'}" class="navbar-brand">
+            <router-link :to="{path : '/schedule'}" class="navbar-brand">
               <img src="https://dataprolegal.com/wp-content/uploads/2018/06/Logo-comunidad_3.png" width="auto" height="45px" class="d-inline-block" />
             </router-link>
             
@@ -62,19 +62,33 @@
 
 
 <script>
-  export default {
-    name: 'App',
+  
+    export default {
     computed : {
-      isLoggedIn : function(){ return !!localStorage.getItem('token') }
+      isLoggedIn : function(){ return this.$store.getters.isLoggedIn}
     },
     methods: {
       logout: function () {
-          localStorage.removeItem('token')
-          delete axios.defaults.headers.common['Authorization']
-          this.$router.push('login')
+        this.$store.dispatch('logout')
+        .then(() => {
+          this.$router.push('/login')
+        })
       }
     },
+    
+    created: function () {
+      this.$http.interceptors.response.use(undefined, function (err) {
+        return new Promise(function (resolve, reject) {
+          if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+            this.$store.dispatch(logout)
+          }
+          throw err;
+        });
+      });
+    }
+    
   }
+  
 </script>
 
 

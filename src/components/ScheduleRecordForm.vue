@@ -38,9 +38,41 @@
                                    </select>
                                    <span class="text-danger" v-text="errors.motive_id[0]"></span>
                                </div>
-                               <div class="form-group" style="display: none;">
-                                   <textarea id="schedule_record_more_details" maxlength="250" :class="'form-control ' + (hasError('more_details') ? 'is-invalid' : '' ) " placeholder="Detalla el motivo" v-model="schedule_record.motive_details"></textarea>
-                                   <span class="text-danger" v-text="errors.motive_details[0]"></span>
+                               <div class="more-details-container" style="display: none;">
+                                   <div class="form-group row text-left">
+                                       <div class="col-12">
+                                           <h6 class="font-weight-bold">Horario #1</h6>
+                                       </div>
+                                       <div class="col">
+                                           <label>Hora de entrada</label>
+                                           <input :class="'form-control form-control-sm ' + (hasError('entry_time') ? 'is-invalid' : '' ) " type="time" placeholder="00:00" required v-model="schedule_record.entry_time">
+                                           <span class="text-danger small" v-text="errors.entry_time[0]"></span>
+                                       </div>
+                                       <div class="col">
+                                           <label>Hora de salida</label>
+                                           <input :class="'form-control form-control-sm ' + (hasError('departure_time') ? 'is-invalid' : '' ) " type="time" placeholder="00:00" required v-model="schedule_record.departure_time">
+                                           <span class="text-danger small" v-text="errors.departure_time[0]"></span>
+                                       </div>
+                                   </div>
+                                   <div class="form-group row text-left" v-if="info.sec_schedule_entry_time && info.sec_schedule_departure_time">
+                                       <div class="col-12">
+                                           <h6 class="font-weight-bold">Horario #2</h6>
+                                       </div>
+                                       <div class="col">
+                                           <label>Hora de entrada</label>
+                                           <input :class="'form-control form-control-sm ' + (hasError('sec_entry_time') ? 'is-invalid' : '' ) " type="time" placeholder="00:00" required v-model="schedule_record.sec_entry_time">
+                                           <span class="text-danger small" v-text="errors.sec_entry_time[0]"></span>
+                                       </div>
+                                       <div class="col">
+                                           <label>Hora de salida</label>
+                                           <input :class="'form-control form-control-sm ' + (hasError('sec_departure_time') ? 'is-invalid' : '' ) " type="time" placeholder="00:00" required v-model="schedule_record.sec_departure_time">
+                                           <span class="text-danger small" v-text="errors.sec_departure_time[0]"></span>
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
+                                       <textarea id="schedule_record_more_details" maxlength="250" :class="'form-control ' + (hasError('more_details') ? 'is-invalid' : '' ) " placeholder="Detalla el motivo" v-model="schedule_record.motive_details"></textarea>
+                                       <span class="text-danger" v-text="errors.motive_details[0]"></span>
+                                   </div>
                                </div>
                                <div class="text-center">
                                    <button class="btn btn-primary" @click.prevent="submitSignIn()">Aceptar</button>
@@ -131,12 +163,20 @@
                 errors: {
                     executed: [],
                     motive_id: [],
-                    motive_details: []
+                    motive_details: [],
+                    entry_time: [],
+                    departure_time: [],
+                    sec_entry_time: [],
+                    sec_departure_time: []
                 },
                 schedule_record: {
                     executed: null,
                     motive_id: '',
-                    motive_details: null
+                    motive_details: null,
+                    entry_time: null,
+                    departure_time: null,
+                    sec_entry_time: null,
+                    sec_departure_time: null
                 },
                 info: {
                     current_date: '',
@@ -159,19 +199,32 @@
                 if(typeof undefined == typeof schedule_record.id) {
                     vm.status = 'ready';
                     vm.fillMotives();
+                    vm.schedule_record = Object.assign(vm.schedule_record, 
+                        {
+                            entry_time: schedule_record.schedule_entry_time,
+                            departure_time: schedule_record.schedule_departure_time,
+                            sec_entry_time: schedule_record.sec_schedule_entry_time,
+                            sec_departure_time: schedule_record.sec_schedule_departure_time
+                        }
+                    );
                 }
                 else {
                     vm.status = 'sent';
                 }
                 
-                vm.info = Object.assign(vm.info, { current_date: schedule_record.date, hours: schedule_record.hours });
+                vm.info = Object.assign(schedule_record, 
+                    { 
+                        current_date: schedule_record.date, 
+                        hours: schedule_record.schedule,
+                    }
+                );
                 
             })
             .catch((error) => {
                 vm.status = 'fatal-error';
                 
                 switch(error.response.status) {
-                    case 400:
+                    case 400: 
                     case 403: {
                         vm.message = error.response.data.message;
                         break;
@@ -191,10 +244,10 @@
                 let $more_details = $('#schedule_record_more_details');
                 
                 if($option.length > 0 && $option.attr('need_details') > 0) {
-                    $more_details.parents('.form-group').slideDown();
+                    $more_details.parents('.more-details-container').slideDown();
                 }
                 else {
-                    $more_details.parents('.form-group').slideUp();
+                    $more_details.parents('.more-details-container').slideUp();
                 }
             },
             submitSignIn: function() {
@@ -204,12 +257,16 @@
                 
                 vm.resetErrors();
                 
-                
                 let schedule_submit = new URLSearchParams();
                 
                 schedule_submit.append('executed', vm.schedule_record.executed ? vm.schedule_record.executed : '');
                 schedule_submit.append('motive_id', vm.schedule_record.motive_id ? vm.schedule_record.motive_id : '');
                 schedule_submit.append('motive_details', vm.schedule_record.motive_details ? vm.schedule_record.motive_details : '' );
+                
+                schedule_submit.append('entry_time', vm.schedule_record.entry_time ? vm.schedule_record.entry_time : '' );
+                schedule_submit.append('departure_time', vm.schedule_record.departure_time ? vm.schedule_record.departure_time : '' );
+                schedule_submit.append('sec_entry_time', vm.schedule_record.sec_entry_time ? vm.schedule_record.sec_entry_time : '' );
+                schedule_submit.append('sec_departure_time', vm.schedule_record.sec_departure_time ? vm.schedule_record.sec_departure_time : '' );
                 
                 
                 axios
@@ -219,7 +276,7 @@
                     $('#successModal').modal();
                     
                     vm.status = 'sent';
-                    console.log(vm.schedule_record);
+                    console.log(schedule_submit);
                     
                 })
                 .catch((error, data) => {

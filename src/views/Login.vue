@@ -6,12 +6,12 @@
                 <div class="card-header">Acceder</div>
 
                 <div class="card-body">
-                    <form @submit.prevent="submit(user)">
+                    <form @submit.prevent="login">
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">Correo electrónico</label>
     
                             <div class="col-md-6">
-                                <input v-model="user.email" id="email" type="email" class="form-control" :class="{'is-invalid' : errors.email.lenght }" name="email" required autocomplete="email" autofocus>
+                                <input v-model="email" id="email" type="email" class="form-control" :class="{'is-invalid' : errors.email.lenght }" name="email" required autocomplete="email" autofocus>
     
                                 <span v-for="error in errors.email" class="invalid-feedback" role="alert">
                                     <strong>{{ $error }}</strong>
@@ -23,7 +23,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">Contraseña</label>
     
                             <div class="col-md-6">
-                                <input v-model="user.password" id="password" type="password" class="form-control" :class="{'is-invalid' : errors.password.lenght }" name="password" required autocomplete="current-password">
+                                <input v-model="password" id="password" type="password" class="form-control" :class="{'is-invalid' : errors.password.lenght }" name="password" required autocomplete="current-password">
     
                                 <span v-for="error in errors.email" class="invalid-feedback" role="alert">
                                     <strong>{{ $error }}</strong>
@@ -34,7 +34,7 @@
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
-                                    <input v-model="user.remember_me" class="form-check-input" type="checkbox" name="remember" id="remember">
+                                    <input v-model="remember_me" class="form-check-input" type="checkbox" name="remember" id="remember">
     
                                     <label class="form-check-label" for="remember">
                                         Recuérdame
@@ -60,50 +60,30 @@
 </div>
 </template>
 <script>
-    export default{
-        data(){
-            return {
-                user : {
-                    email : null,
-                    password : null,
-                    remember_me : false
-                },
-                errors : {
+  export default {
+    data(){
+      return {
+        email : "",
+        password : "",
+        remember_me : "",
+        errors : {
                     email : [],
                     password : [],
                     remember_me : [],
                 }
-            }
-        },
-        methods : {
-            submit(user){
-                
-                let user_send = new URLSearchParams();
-                user_send.append('email', user.email);
-                user_send.append('password', user.password);
-                user_send.append('remember_me', user.remember_me);
-                
-                //console.log("sending user: " , user_send.entries());
-                
-                axios.post(API.login, user_send)
-                    .then(response => {
-                        console.log('response: ', response);
-                        
-                        let token = response.data.access_token;
-                        localStorage.setItem('token', token)
-                        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-                        
-                        console.log("token local establecido: ", localStorage.getItem('token'));
-                        
-                        this.$router.push('schedule')
-                        
-                    })
-                    .catch(error => {
-                        console.log('error: ', error);
-                    })
-            }
-        }
+      }
+    },
+    
+    methods: {
+      login: function () {
+        let email = this.email 
+        let password = this.password
+        this.$store.dispatch('login', { email, password })
+       .then(() => this.$router.push('/schedule'))
+       .catch(err => console.log(err))
+      }
     }
+  }
 </script>
 <style>
     .card-header:first-child {
