@@ -4,7 +4,7 @@
             <h5 v-if="!work_report.id">Cargando...</h5>
             <h5 v-else>
                 <span class="float-right">
-                    <a class="action btn btn-sm btn-danger mr-2" :href="pdfUrl" title="Ver PDF" download><i class="oi oi-document"></i></a>
+                    <a class="action btn btn-sm btn-danger mr-2" :href="pdfUrl" title="Ver PDF"><i class="oi oi-document"></i></a>
                 </span>
                 Reporte de {{ work_report.user.full_name }} | {{ work_report.date }}
             </h5>
