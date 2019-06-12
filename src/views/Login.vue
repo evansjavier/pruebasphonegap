@@ -76,7 +76,15 @@
                 }
       }
     },
-    
+    computed : {
+      isLoggedIn : function(){ return this.$store.getters.isLoggedIn },
+    },
+    mounted : function(){
+        if(this.isLoggedIn){
+            this.$router.push('/schedule');
+            console.log("Login detected, redirect to " + '/schedule');
+        }
+    },
     methods: {
       login: function () {
           let vm = this;
