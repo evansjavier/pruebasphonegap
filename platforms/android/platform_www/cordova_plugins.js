@@ -15,6 +15,22 @@ module.exports = [
     "clobbers": [
       "PushNotification"
     ]
+  },
+  {
+    "id": "cordova-plugin-dialogs.notification",
+    "file": "plugins/cordova-plugin-dialogs/www/notification.js",
+    "pluginId": "cordova-plugin-dialogs",
+    "merges": [
+      "navigator.notification"
+    ]
+  },
+  {
+    "id": "cordova-plugin-dialogs.notification_android",
+    "file": "plugins/cordova-plugin-dialogs/www/android/notification.js",
+    "pluginId": "cordova-plugin-dialogs",
+    "merges": [
+      "navigator.notification"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -23,7 +39,8 @@ module.exports.metadata =
   "cordova-plugin-whitelist": "1.2.2",
   "cordova-plugin-statusbar": "2.1.3",
   "phonegap-plugin-push": "1.8.4",
-  "cordova-plugin-console": "1.0.7"
+  "cordova-plugin-console": "1.0.7",
+  "cordova-plugin-dialogs": "1.3.4"
 };
 // BOTTOM OF METADATA
 });
