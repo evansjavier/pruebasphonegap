@@ -68,7 +68,15 @@
   </div>
 </template>
 
-
+<style>
+  .table td, .table th {
+    vertical-align: middle;
+  }
+  
+  .dataTables_length, .dataTables_filter {
+    display: none !important;
+  }
+</style>
 <script>
   
     export default {

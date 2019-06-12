@@ -70,7 +70,12 @@ let router = new Router({
 
 
 router.beforeEach((to, from, next) => {
-  console.log(this);
+  // Closed menu if it's open
+  if($('body').width() < 768) {
+    if($('#navbarSupportedContent').hasClass('show')) {
+      $('#navbarSupportedContent').siblings('[data-toggle]').click();
+    }
+  }
   
   if(to.matched.some(record => record.meta.requiresAuth)) {
     if (store.getters.isLoggedIn) {

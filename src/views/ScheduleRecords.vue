@@ -27,6 +27,11 @@
         </div>
     </div>
 </template>
+<style>
+    div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+        flex-wrap: wrap;
+    }
+</style>
 <script>
     import DataTable from 'datatables.net-bs4';
     
