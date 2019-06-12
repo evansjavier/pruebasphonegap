@@ -21,11 +21,6 @@
                 <ul class="navbar-nav mr-auto">
                       
                       <li class="nav-item" v-if="isLoggedIn">
-                          <router-link :to="{path : '/schedule'}" class="nav-link">
-                            Fichar
-                          </router-link>
-                      </li>
-                      <li class="nav-item" v-if="isLoggedIn">
                           <router-link :to="{name : 'schedule-records'}" class="nav-link">
                             Fichas
                           </router-link>

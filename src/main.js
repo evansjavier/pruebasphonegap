@@ -14,17 +14,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'datatables.net-bs4/css/dataTables.bootstrap4.min.css';
 import 'open-iconic/font/css/open-iconic-bootstrap.min.css';
 
-Axios.defaults.baseURL = 'https://enterprise-evansjavier.c9users.io/api/auth';
-//axios.defaults.headers.common['Authorization'] = AUTH_TOKEN; 
-
-window.axios = Axios;
-window.API = API;
-
+window.axios   = Axios;
+window.API     = API;
+window.baseURL = 'https://enterprise-evansjavier.c9users.io';
+window.apiURL  = window.baseURL + '/api';
 
 Vue.config.productionTip = false
+Vue.component('work-report-details', require('./components/WorkReportDetails.vue').default);
 
 
-axios.defaults.baseURL = 'https://enterprise-evansjavier.c9users.io/api/auth';
+axios.defaults.baseURL = window.baseURL + '/api/auth';
+//axios.defaults.headers.common['Authorization'] = AUTH_TOKEN; 
 
 Vue.prototype.$http = axios;
 const token = localStorage.getItem('token')

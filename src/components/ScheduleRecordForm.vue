@@ -253,6 +253,12 @@
             submitSignIn: function() {
                 let vm = this;
                 
+                
+                if(vm.status == 'submitting'){
+                    console.log("please wait...");
+                    return false;
+                }
+                
                 vm.status = 'submitting';
                 
                 vm.resetErrors();

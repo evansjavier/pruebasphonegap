@@ -1,24 +1,152 @@
 <template>
-    <div>
-         2 Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-        sed diam nonummy nibh euismod tincidunt ut laoreet dolore
-        magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
-        quis nostrud exerci tation ullamcorper suscipit lobortis nisl
-        ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-        dolor in hendrerit in vulputate velit esse molestie consequat,
-        vel illum dolore eu feugiat nulla facilisis at vero eros et
-        accumsan et iusto odio dignissim qui blandit praesent luptatum
-        zzril delenit augue duis dolore te feugait nulla facilisi.
-        Nam liber tempor cum soluta nobis eleifend option congue
-        nihil imperdiet doming id quod mazim placerat facer possim
-        assum. Typi non habent claritatem insitam; est usus legentis
-        in iis qui facit eorum claritatem. Investigationes
-        demonstraverunt lectores legere me lius quod ii legunt saepius.
-        Claritas est etiam processus dynamicus, qui sequitur mutationem
-        consuetudium lectorum. Mirum est notare quam littera gothica,
-        quam nunc putamus parum claram, anteposuerit litterarum formas
-        humanitatis per seacula quarta decima et quinta decima. Eodem
-        modo typi, qui nunc nobis videntur parum clari, fiant sollemnes
-        in futurum.
+    <div class="card" ref="div">
+        <div class="card-header"><h5>Reportes</h5></div>
+        <div class="card-body">
+            <div ref="table-container">
+                <table class="table table-striped w-100" ref="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
     </div>
 </template>
+<script>
+    import DataTable from 'datatables.net-bs4';
+    
+    export default {
+        mounted() {
+            let vm = this;
+            
+            $(this.$refs['div']).on('click', '.action.action-view', function(){
+                let id = $(this).parents('tr').find('td').first().text();
+                
+                id && vm.$router.push({'name':'work-reports.show', params: {"id":  id } });
+                
+            });
+            
+            $('table').dataTable({
+                processing: true,
+                serverSide: true,
+                pageLength: 5,
+                lengthMenu: [],
+                searching: true,
+                //  language: require('datatables.net-plugins/i18n/Spanish.lang'),
+                ajax: {
+                    dataType: 'json',
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    url: axios.defaults.baseURL + '/work-reports'
+                },
+                columns: [
+                    {data: 'id'},
+                    {
+                        data: function( row, type, vale, meta) {
+                            switch(row.state) {
+                                case 'PENDING': 
+                                    return 'Pendiente';
+                                
+                                case 'SIGNED': 
+                                    return 'Firmado';
+                                
+                                default:
+                                    return '-';
+                            }  
+                        },
+                        name: 'state'
+                        
+                    },
+                    {
+                        data: function ( row, type, val, meta ){
+                            try {
+                                let date = new Date(row.report_date.date);
+                                
+                                return date.toLocaleDateString();
+                            }
+                            catch ( error ){
+                                return row.report_date.date;
+                            }
+                            
+                        },
+                        name: 'report_date'
+                        
+                    },
+                    {data: null, 
+                        defaultContent: 
+                            '<div class="d-flex justify-content-center">'
+                                + ' <btn class="action action-view btn btn-sm btn-primary" title="Ver"><i class="oi oi-eye"></i></btn>'
+                            +'</div>'    
+                    }
+                ],
+                initComplete: function () {
+                    let columns = this.api().init().columns;
+                    
+                    this.api().columns().every(function (index, a) {
+                        var column = this;
+                        let field_name = columns[index].name || columns[index].data;
+                        var $input;
+                        
+                        switch(field_name) {
+                            case 'report_date': {
+                               $input =  $('<input>').attr({
+                                    type: 'date',
+                                    class: 'form-control form-control-sm'
+                                });
+                                
+                                break;
+                            }
+                            
+                            case 'state': {
+                               $input =  $('<select></select>').attr({
+                                    class: 'form-control form-control-sm'
+                                });
+                                
+                                let options = {
+                                    '-' : null,
+                                    'Pendiente': 'PENDING' ,
+                                    'Firmado': 'SIGNED' 
+                                };
+                                
+                                for (let v in options) {
+                                    $('<option></option>').attr({
+                                        value: options[v]
+                                    })
+                                    .text(v)
+                                    .appendTo($input);
+                                }
+                                
+                                break;
+                            }
+                            
+                            default: {
+                                return;
+                            }
+                        }
+                        
+                        $input.appendTo($(column.footer()).empty())
+                        .on('change', function () {
+                            column.search($(this).val(), false, false, true).draw();
+                        });
+                    });
+                    
+                    $(vm.$refs['table-container']).find('table').parent().addClass('table-responsive');
+                }
+            });
+        }
+    }
+</script>

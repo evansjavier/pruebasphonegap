@@ -10,7 +10,7 @@
                             <th>Fecha</th>
                             <th>Horario</th>
                             <th>Realizado</th>
-                            <th>Acciones</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -19,7 +19,7 @@
                             <th>Fecha</th>
                             <th>Horario</th>
                             <th>Realizado</th>
-                            <th>Acciones</th>
+                            <th></th>
                         </tr>
                     </tfoot>
                 </table>
@@ -81,15 +81,6 @@
                         var $input;
                         
                         switch(columns[index].data) {
-                            case 'id': {
-                                $input = $('<input>').attr({
-                                    type: 'number',
-                                    min: 1,
-                                    step: 1,
-                                    class: 'form-control form-control-sm'
-                                });
-                                break;
-                            }
                             
                             case 'date': {
                                $input =  $('<input>').attr({

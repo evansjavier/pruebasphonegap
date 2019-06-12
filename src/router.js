@@ -9,6 +9,9 @@ import ScheduleRecordForm from './components/ScheduleRecordForm.vue'
 import ScheduleRecords from './views/ScheduleRecords.vue';
 import ScheduleRecordsShow from './views/ScheduleRecordsShow.vue';
 import WorkReports from './views/WorkReports';
+import WorkReportsShow from './views/WorkReportsShow.vue';
+
+import ScheduleRecordSign from './views/ScheduleRecordSign';
 
 Vue.use(Router)
 
@@ -37,7 +40,7 @@ let router = new Router({
     {
       path: '/schedule',
       name: 'schedule',
-      component: ScheduleRecordForm
+      component: ScheduleRecordSign
     },
     {
       path: '/schedule-records',
@@ -54,6 +57,12 @@ let router = new Router({
       path: '/work-reports',
       name: 'work-reports',
       component: WorkReports
+    },
+    {
+      path: '/work-reports/:id',
+      name: 'work-reports.show',
+      component: WorkReportsShow,
+      props: true
     }
     
   ]
