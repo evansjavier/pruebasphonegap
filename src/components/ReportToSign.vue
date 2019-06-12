@@ -79,7 +79,8 @@ export default {
         .catch((error, data) => {
             console.log(error);
             switch(error.response.status) {
-                case 422: {
+                case 404: {
+                    //console.log("sin reporte por firmar")
                     break;
                 }
                 default: {
