@@ -91,6 +91,7 @@
         methods: {
             fetchRecord: function() {
                 let vm = this;
+                let loader = this.$loading.show();
                 
                 axios.get('schedule-records/' + vm.id )
                 .then( resp => {
@@ -108,6 +109,9 @@
                             alert('Ha ocurrido un error inesperado, si el error persiste contacte con el administrador del sistema.');
                         }
                     }
+                })
+                .then(() => {
+                    loader.hide();
                 })
             }
         }

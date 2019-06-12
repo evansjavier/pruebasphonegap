@@ -79,6 +79,7 @@
     
     methods: {
       login: function () {
+          let vm = this;
         let email = this.email 
         let password = this.password
         let self = this;
@@ -87,6 +88,7 @@
             this.errors[field]  = [];
         }
         
+        let loader = this.$loading.show();
         this.$store.dispatch('login', { email, password })
        .then(() => 
             this.$router.push('/schedule'))
@@ -111,6 +113,9 @@
             else{
                 alert("Hubo un error, por favor intente más tarde...")
             }
+       })
+       .then(() => {
+           loader.hide();
        })
            
       }

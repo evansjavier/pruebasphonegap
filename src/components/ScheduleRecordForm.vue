@@ -191,6 +191,8 @@
         mounted: function() {
             let vm = this;
             
+            let loader = this.$loading.show();
+            
           // Verify's if the user has already sign
           axios.get('schedule-records/today')
             .then((resp) => {
@@ -235,6 +237,9 @@
                     }
                 }
             })
+            .then(() => {
+               loader.hide(); 
+            });
         },
         methods: {
             expandDetails: function() {

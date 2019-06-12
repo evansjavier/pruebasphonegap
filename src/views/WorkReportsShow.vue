@@ -47,6 +47,8 @@
             fetchRecord: function() {
                 let vm = this;
                 
+                let loader = this.$loading.show();
+                
                 axios.get('work-reports/' + vm.id )
                 .then( resp => {
                     console.log(resp);
@@ -63,6 +65,9 @@
                             alert('Ha ocurrido un error inesperado, si el error persiste contacte con el administrador del sistema.');
                         }
                     }
+                })
+                .then(() => {
+                    loader.hide();
                 })
             }
         }
