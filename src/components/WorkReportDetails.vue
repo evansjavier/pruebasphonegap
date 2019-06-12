@@ -18,7 +18,7 @@
                     </tr>
                 </tbody>
             </table>
-            <p v-if="work_report.signed">Firmado el {{ work_report.signed_at }}</p>
+            <p v-if="work_report.is_signed">Firmado el {{ work_report.signed_at.date }}</p>
         </div>
         
            
