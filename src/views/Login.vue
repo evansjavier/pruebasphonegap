@@ -83,6 +83,10 @@
         let password = this.password
         let self = this;
         
+        for(let field in this.errors) {
+            this.errors[field]  = [];
+        }
+        
         this.$store.dispatch('login', { email, password })
        .then(() => 
             this.$router.push('/schedule'))
