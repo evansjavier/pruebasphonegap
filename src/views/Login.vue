@@ -92,6 +92,7 @@
             this.$router.push('/schedule'))
        
        .catch(function(err){
+           console.log(err);
            
             let resp_err = err.response.data.errors;
             
