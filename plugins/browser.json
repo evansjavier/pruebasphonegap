@@ -39,6 +39,16 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.datapro.fichaje"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.datapro.fichaje"
+    },
+    "phonegap-plugin-push": {
+      "SENDER_ID": "XXXXXXX",
+      "PACKAGE_NAME": "es.presencialaboral.dataprocontrol"
+    },
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "es.presencialaboral.dataprocontrol"
     }
   },
   "dependent_plugins": {

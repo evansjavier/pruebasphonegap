@@ -3,9 +3,9 @@
   "display": "standalone",
   "name": "Datapro",
   "short_name": "Datapro",
-  "version": "com.datapro.fichaje",
-  "description": "Hello World sample application that responds to the deviceready event.",
-  "author": "Datapro",
+  "version": "es.presencialaboral.dataprocontrol",
+  "description": "La solución más competitiva para cumplir el registro de jornada laboral",
+  "author": "Datapro Legal",
   "icons": [],
   "start_url": "www/dist/index.html"
 }
