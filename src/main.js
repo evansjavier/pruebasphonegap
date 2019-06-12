@@ -16,7 +16,7 @@ import 'open-iconic/font/css/open-iconic-bootstrap.min.css';
 
 window.axios   = Axios;
 window.API     = API;
-window.baseURL = 'https://enterprise-evansjavier.c9users.io';
+window.baseURL = 'https://dataprocontrol.presencialaboral.es';
 window.apiURL  = window.baseURL + '/api';
 
 Vue.config.productionTip = false
