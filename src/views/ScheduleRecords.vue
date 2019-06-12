@@ -31,6 +31,10 @@
     div.dataTables_wrapper div.dataTables_paginate ul.pagination {
         flex-wrap: wrap;
     }
+    
+    div.dataTables_wrapper div.dataTables_info {
+        white-space: normal;
+    }
 </style>
 <script>
     import DataTable from 'datatables.net-bs4';
@@ -54,7 +58,7 @@
                 pageLength: 5,
                 lengthMenu: [],
                 searching: true,
-                //  language: require('datatables.net-plugins/i18n/Spanish.lang'),
+                language: require('../assets/dt.spanish').default,
                 ajax: {
                     dataType: 'json',
                     headers: {
@@ -63,19 +67,38 @@
                     url: axios.defaults.baseURL + '/schedule-records'
                 },
                 columns: [
-                    {data: 'id'},
-                    {data: 'date'},
-                    {data: 'schedule'},
+                    {data: 'id', name: 'id'},
+                    {
+                        data: function ( row, type, val, meta ){
+                            try {
+                                let date = new Date(row.date);
+                                
+                                return date.toLocaleDateString();
+                            }
+                            catch ( error ){
+                                return row.date;
+                            }
+                            
+                        }, 
+                        name: 'date'
+                        
+                    },
+                    {data: 'schedule', name: 'schedule'},
                     {data: 'executed', 
                         render: function(data){
                             return data > 0 ? "Si" : "No";
-                        }
+                        },
+                        'className' : 'text-center',
+                        name: 'executed'
                     },
-                    {data: null, 
+                    {
+                        data: null, 
                         defaultContent: 
                             '<div class="d-flex justify-content-center">'
                                 + ' <btn class="action action-view btn btn-sm btn-primary" title="Ver"><i class="oi oi-eye"></i></btn>'
-                            +'</div>'    
+                            +'</div>',
+                        searchable: false,
+                        orderable: false,
                     }
                 ],
                 initComplete: function () {
@@ -85,7 +108,7 @@
                         var column = this;
                         var $input;
                         
-                        switch(columns[index].data) {
+                        switch(columns[index].name) {
                             
                             case 'date': {
                                $input =  $('<input>').attr({
@@ -102,15 +125,16 @@
                                 });
                                 
                                 let options = {
-                                    0: 'No',
-                                    1: 'Si'
+                                    '-' : '',
+                                    'No': 0 ,
+                                    'Si': 1
                                 };
                                 
                                 for (let v in options) {
                                     $('<option></option>').attr({
-                                        value: v
+                                        value: options[v]
                                     })
-                                    .text(options[v])
+                                    .text(v)
                                     .appendTo($input);
                                 }
                                 

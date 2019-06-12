@@ -25,6 +25,15 @@
         </div>
     </div>
 </template>
+<style>
+    div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+        flex-wrap: wrap;
+    }
+    
+    div.dataTables_wrapper div.dataTables_info {
+        white-space: normal;
+    }
+</style>
 <script>
     import DataTable from 'datatables.net-bs4';
     
@@ -45,7 +54,7 @@
                 pageLength: 5,
                 lengthMenu: [],
                 searching: true,
-                //  language: require('datatables.net-plugins/i18n/Spanish.lang'),
+                language: require('../assets/dt.spanish').default,
                 ajax: {
                     dataType: 'json',
                     headers: {
@@ -73,24 +82,20 @@
                     },
                     {
                         data: function ( row, type, val, meta ){
-                            try {
-                                let date = new Date(row.report_date.date);
-                                
-                                return date.toLocaleDateString();
-                            }
-                            catch ( error ){
-                                return row.report_date.date;
-                            }
+                            return row.report_date;
                             
                         },
                         name: 'report_date'
                         
                     },
-                    {data: null, 
+                    {
+                        data: null, 
                         defaultContent: 
                             '<div class="d-flex justify-content-center">'
                                 + ' <btn class="action action-view btn btn-sm btn-primary" title="Ver"><i class="oi oi-eye"></i></btn>'
-                            +'</div>'    
+                            +'</div>',
+                        searchable: false,
+                        orderable: false,
                     }
                 ],
                 initComplete: function () {
@@ -124,7 +129,7 @@
                                 
                                 for (let v in options) {
                                     $('<option></option>').attr({
-                                        value: options[v]
+                                        value: options[v] || ''
                                     })
                                     .text(v)
                                     .appendTo($input);
