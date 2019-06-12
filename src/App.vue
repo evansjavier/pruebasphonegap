@@ -4,11 +4,11 @@
         <div class="container">
           
             <router-link v-if="isLoggedIn" :to="{path : '/schedule'}" class="nav-link">
-              <img src="https://dataprocontrol.presencialaboral.esimg/logo.png" width="auto" height="45px" class="d-inline-block" />
+              <img src="https://dataprocontrol.presencialaboral.es/img/logo.png" width="auto" height="45px" class="d-inline-block" />
             </router-link>
                       
             <router-link v-else :to="{path : '/login'}" class="navbar-brand">
-              <img src="https://dataprocontrol.presencialaboral.esimg/logo.png" width="auto" height="45px" class="d-inline-block" />
+              <img src="https://dataprocontrol.presencialaboral.es/img/logo.png" width="auto" height="45px" class="d-inline-block" />
             </router-link>
             
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

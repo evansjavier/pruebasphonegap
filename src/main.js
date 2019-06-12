@@ -24,7 +24,6 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 window.axios   = Axios;
 window.API     = API;
 window.baseURL = 'https://dataprocontrol.presencialaboral.es';
-window.baseURL = 'https://enterprise-evansjavier.c9users.io';
 window.apiURL  = window.baseURL + '/api';
 
 Vue.config.productionTip = false
