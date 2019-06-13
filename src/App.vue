@@ -81,7 +81,7 @@
     display: none !important;
   }
   
-  .io {
+  .oi {
     vertical-align: middle;
   }
 </style>
