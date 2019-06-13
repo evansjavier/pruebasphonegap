@@ -98,5 +98,4 @@
     </plugin>
     <plugin name="cordova-plugin-file" />
     <plugin name="cordova-plugin-console" spec="~1.0.3" />
-    <plugin name="cordova-plugin-fcm"/>
 </widget>
