@@ -89,7 +89,8 @@
       "phonegap-plugin-push": {
         "SENDER_ID": "XXXXXXX"
       },
-      "cordova-plugin-console": {}
+      "cordova-plugin-console": {},
+      "cordova-plugin-fcm": {}
     }
   }
 }

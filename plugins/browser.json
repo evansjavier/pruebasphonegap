@@ -28,6 +28,9 @@
     },
     "cordova-plugin-file": {
       "PACKAGE_NAME": "es.presencialaboral.dataprocontrol"
+    },
+    "cordova-plugin-fcm": {
+      "PACKAGE_NAME": "es.presencialaboral.dataprocontrol"
     }
   },
   "dependent_plugins": {}
