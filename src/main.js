@@ -75,8 +75,24 @@ new Vue({
             // Bind any cordova events here. Common events are:
             // 'pause', 'resume', etc.
             onDeviceReady: function() {
-                console.log("Device Ready (Cordova)");
+                this.receivedEvent('deviceready');
+                this.pushNotification();
             },
+            
+            // Update DOM on a Received Event
+            receivedEvent: function(id) {
+                console.log('Received Event: ' + id);
+            },
+            pushNotification: function(){
+              FCMPlugin.onNotification(function(data){
+                if(data.wasTapped){
+                  alert(JSON.stringify(data));
+                }else{
+                  alert(JSON.stringify(data));
+                }
+              });
+            }
+            
         
             
         };
