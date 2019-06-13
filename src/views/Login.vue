@@ -51,6 +51,9 @@
                                 <button class="btn btn-primary">
                                     Acceder
                                 </button>
+                                <a class="btn btn-link" :href="forgotURL">
+                                    ¿Olvidaste tu contraseña?
+                                </a>
                             </div>
                         </div>
                         
@@ -78,6 +81,9 @@
     },
     computed : {
       isLoggedIn : function(){ return this.$store.getters.isLoggedIn },
+      forgotURL: function(){
+          return window.baseURL + "/password/reset";
+      }
     },
     mounted : function(){
         if(this.isLoggedIn){

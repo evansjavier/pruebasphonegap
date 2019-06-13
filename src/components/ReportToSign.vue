@@ -150,8 +150,6 @@ var startToDraw = function(vm) {
   var canvas_id  = "firma";
   var canvas     = document.getElementById(canvas_id);
   
-  console.log(vm,canvas_id, 'HEy', vm.$refs['canvas_sign'], document.getElementById(canvas_id));
-  
   vm.firmado     = false;
   
   var context = canvas.getContext('2d');
@@ -225,7 +223,6 @@ var startToDraw = function(vm) {
       }
       draw();
   }
-  
   $('#'+canvas_id)
   .on('mousedown touchstart', function(e){
    

@@ -73,8 +73,16 @@
     vertical-align: middle;
   }
   
+  div.dataTables_wrapper div.dataTables_info {
+    white-space: normal !important;
+  }
+  
   .dataTables_length, .dataTables_filter {
     display: none !important;
+  }
+  
+  .io {
+    vertical-align: middle;
   }
 </style>
 <script>
