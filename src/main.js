@@ -53,27 +53,34 @@ new Vue({
 
 
 /* CORDOVA APP */
-    var app = {
-        // Application Constructor
-        initialize: function() {
-            document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-        },
-    
-        // deviceready Event Handler
-        //
-        // Bind any cordova events here. Common events are:
-        // 'pause', 'resume', etc.
-        onDeviceReady: function() {
-            this.receivedEvent('deviceready');
-            alert("Device Ready");
-        },
-    
-        // Update DOM on a Received Event
-        receivedEvent: function(id) {
-            console.log('Received Event: ' + id);
+
+    // Add cordova.js
+        if (window.location.protocol === 'file:' || window.location.port === '3000') {
+          var cordovaScript = document.createElement('script')
+          cordovaScript.setAttribute('type', 'text/javascript')
+          cordovaScript.setAttribute('src', '../../cordova.js')
+          document.body.appendChild(cordovaScript)
         }
-    };
-    
-    app.initialize();
+        
+    // Handle cordova events
+        
+        var app = {
+            // Application Constructor
+            initialize: function() {
+                document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+            },
+        
+            // deviceready Event Handler
+            //
+            // Bind any cordova events here. Common events are:
+            // 'pause', 'resume', etc.
+            onDeviceReady: function() {
+                console.log("Device Ready (Cordova)");
+            },
+        
+            
+        };
+        
+        app.initialize();
     
 /* END - CORDOVA APP */

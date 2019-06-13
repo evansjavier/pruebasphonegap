@@ -1,6 +1,6 @@
 <template>
     <div class="text-center">
-        <div class="">
+        <div v-if="status != 'hidden' ">
             <div class="card-body" v-show="['ready', 'submitting', 'error'].indexOf(status) != -1 ">
                 <div class=" text-center">
                     <h2>{{ info.current_date }}</h2>
@@ -229,6 +229,11 @@
                     case 400: 
                     case 403: {
                         vm.message = error.response.data.message;
+                        break;
+                    }
+                    
+                    case 424: {
+                        vm.status = 'hidden';
                         break;
                     }
                     
