@@ -21,7 +21,6 @@
     "datatables.net-responsive-dt": "^2.2.3",
     "moment": "^2.24.0",
     "open-iconic": "^1.1.1",
-    "phonegap-plugin-push": "~1.8.0",
     "store": "^2.0.12",
     "vue": "^2.5.2",
     "vue-loading-overlay": "^3.2.0",
@@ -88,9 +87,6 @@
       "cordova-plugin-network-information": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
-      "phonegap-plugin-push": {
-        "SENDER_ID": "XXXXXXX"
-      },
       "cordova-plugin-console": {},
       "cordova-plugin-fcm": {}
     }
