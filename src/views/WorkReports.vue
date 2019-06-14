@@ -35,8 +35,6 @@
     }
 </style>
 <script>
-    import DataTable from 'datatables.net-bs4';
-    
     export default {
         mounted() {
             let vm = this;
@@ -54,6 +52,7 @@
                 pageLength: 5,
                 lengthMenu: [],
                 searching: true,
+                responsive: true,
                 language: require('../assets/dt.spanish').default,
                 ajax: {
                     dataType: 'json',

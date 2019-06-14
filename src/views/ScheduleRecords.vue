@@ -73,7 +73,7 @@
                             try {
                                 let date = new Date(row.date);
                                 
-                                return date.toLocaleDateString();
+                                return moment(row.date).format('L') ;
                             }
                             catch ( error ){
                                 return row.date;
@@ -83,7 +83,7 @@
                         name: 'date'
                         
                     },
-                    {data: 'schedule', name: 'schedule'},
+                    {data: 'schedule', name: 'schedule', searchable: false, orderable: false},
                     {data: 'executed', 
                         render: function(data){
                             return data > 0 ? "Si" : "No";

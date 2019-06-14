@@ -3,7 +3,7 @@
         <div v-if="status != 'hidden' ">
             <div class="card-body" v-show="['ready', 'submitting', 'error'].indexOf(status) != -1 ">
                 <div class=" text-center">
-                    <h2>{{ info.current_date }}</h2>
+                    <h2>{{ schedule_date }}</h2>
                     <p class="lead mb-2">¿Ha realizado este horario?</p>
                     <p class="font-weight-bold"> {{ info.hours }}</p>
                     <div class="row justify-content-center">
@@ -71,7 +71,7 @@
                                    </div>
                                    <div class="form-group">
                                        <textarea id="schedule_record_more_details" maxlength="250" :class="'form-control ' + (hasError('more_details') ? 'is-invalid' : '' ) " placeholder="Detalla el motivo" v-model="schedule_record.motive_details"></textarea>
-                                       <span class="text-danger" v-text="errors.motive_details[0]"></span>
+                                       <span class="text-danger small" v-text="errors.motive_details[0]"></span>
                                    </div>
                                </div>
                                <div class="text-center">
@@ -90,7 +90,7 @@
                 <div class="p-4" v-show="status == 'sent'">
                     <h5 class="font-weight-bold">Hemos recibido tu ficha de hoy.</h5>
                     <p class="m-1">Gracias por tu colaboraci&oacute;n</p>
-                    <p class="m-1">{{ info.current_date }}</p>
+                    <p class="m-1">{{ schedule_date }}</p>
                 </div>
             </div>
         </div>
@@ -102,7 +102,7 @@
                     </div>
                     <div class="modal-body text-left">
                        <div v-if="schedule_record.executed == 1">
-                           <h4 class="m-0">{{ info.current_date}}</h4>
+                           <h4 class="m-0">{{ schedule_date }}</h4>
                            <p class="lead m-0">{{ info.hours }}</p>
                        </div>
                        <div v-else>
@@ -187,6 +187,11 @@
                 motive_list: []
               
             }
+        },
+        computed: {
+          schedule_date: function() {
+            return moment(this.info.current_date).format('L');
+          }  
         },
         mounted: function() {
             let vm = this;

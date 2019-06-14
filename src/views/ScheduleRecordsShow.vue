@@ -18,7 +18,7 @@
                                     </tr>
                                     <tr>
                                         <th>Fecha</th>
-                                        <td>{{ schedule_record.date }}</td>
+                                        <td>{{ schedule_date }}</td>
                                     </tr>
                                     <tr>
                                         <th>Horario</th>
@@ -84,6 +84,11 @@
             return {
                 schedule_record: {}
             }
+        },
+        computed: {
+            schedule_date: function() {
+                return moment(this.schedule_record.date).format('L')
+            }  
         },
         beforeMount() {
             this.fetchRecord();

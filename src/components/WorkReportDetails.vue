@@ -18,7 +18,7 @@
                     </tr>
                 </tbody>
             </table>
-            <p v-if="work_report.is_signed">Firmado el {{ work_report.signed_at.date }}</p>
+            <p v-if="work_report.is_signed">Firmado el {{ signed_date }}</p>
         </div>
         
            
@@ -45,7 +45,7 @@
                </thead>
                <tbody>
                    <tr v-for=" schedule_record in work_report.schedule_records">
-                       <td>{{ schedule_record.date }}</td>
+                       <td>{{ moment(schedule_record.date).format('L') }}</td>
                        <td>{{ schedule_record.entry_time }}</td>
                        <td>{{ schedule_record.departure_time }}</td>
                        <td>{{ schedule_record.first_working_hours }}</td>
@@ -77,6 +77,16 @@
             },
             actions: {
                 default: false
+            }
+        },
+        computed: {
+            signed_date: function() {
+                return moment(this.work_report.signed_at.date).format('LLL');
+            }
+        },
+        methods: {
+            moment: function(a) {
+                return moment(a);
             }
         }
     }

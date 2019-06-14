@@ -10,17 +10,6 @@ import Axios from 'axios'
 import API from './API';
 import VueLoading from 'vue-loading-overlay';
 
-import 'bootstrap'; 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'datatables.net-bs4/css/dataTables.bootstrap4.min.css';
-
-
-//import 'open-iconic/font/css/open-iconic-bootstrap.min.css';
-
-import '@icon/open-iconic/open-iconic.css';
-
-import 'vue-loading-overlay/dist/vue-loading.css';
-
 window.axios   = Axios;
 window.API     = API;
 window.baseURL = 'https://dataprocontrol.presencialaboral.es';
