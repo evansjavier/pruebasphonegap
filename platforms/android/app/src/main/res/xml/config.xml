@@ -1,21 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="es.presencialaboral.dataprocontrol" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <feature name="Whitelist">
-        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
-        <param name="onload" value="true" />
-    </feature>
-    <feature name="StatusBar">
-        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
-        <param name="onload" value="true" />
-    </feature>
-    <feature name="Notification">
-        <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
-    </feature>
-    <feature name="File">
-        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
-        <param name="onload" value="true" />
-    </feature>
-    <allow-navigation href="cdvfile:*" />
     <name>Datapro</name>
     <description>
         La solución más competitiva para cumplir el registro de jornada laboral
@@ -49,6 +33,7 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="phonegap-version" value="cli-8.0.0" />
     <preference name="android-minSdkVersion" value="26" />
+    <preference name="android-targetSdkVersion" value="16" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarStyle" value="blacktranslucent" />
     <preference name="SplashMaintainAspectRatio" value="true" />
