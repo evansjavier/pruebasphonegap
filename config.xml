@@ -9,12 +9,9 @@
     </author>
     <content src="www/dist/index.html" />
     <preference name="DisallowOverscroll" value="true" />
-    
     <preference name="phonegap-version" value="cli-8.0.0" />
-    <preference name="android-minSdkVersion"  value="16" />
-    <preference name="android-targetSdkVersion"  value="26" />
-    
-    
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="android-targetSdkVersion" value="26" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarStyle" value="blacktranslucent" />
     <platform name="ios">
@@ -60,12 +57,6 @@
         <splash density="port-xhdpi" src="www/res/screen/android/splash-port-xhdpi.png" />
         <splash density="port-xxhdpi" src="www/res/screen/android/splash-port-xxhdpi.png" />
         <splash density="port-xxxhdpi" src="www/res/screen/android/splash-port-xxxhdpi.png" />
-        <splash density="land-ldpi" src="www/res/screen/android/splash-land-ldpi.png" />
-        <splash density="land-mdpi" src="www/res/screen/android/splash-land-mdpi.png" />
-        <splash density="land-hdpi" src="www/res/screen/android/splash-land-hdpi.png" />
-        <splash density="land-xhdpi" src="www/res/screen/android/splash-land-xhdpi.png" />
-        <splash density="land-xxhdpi" src="www/res/screen/android/splash-land-xxhdpi.png" />
-        <splash density="land-xxxhdpi" src="www/res/screen/android/splash-land-xxxhdpi.png" />
     </platform>
     <platform name="windows">
         <icon src="www/res/icon/windows/storelogo.png" target="StoreLogo" />
@@ -102,4 +93,5 @@
         <variable name="SENDER_ID" value="XXXXXXX" />
     </plugin>
     <plugin name="cordova-plugin-console" spec="~1.0.3" />
+    <plugin name="cordova-plugin-fcm" />
 </widget>
