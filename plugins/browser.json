@@ -19,9 +19,6 @@
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.datapro.fichaje"
     },
-    "cordova-plugin-console": {
-      "PACKAGE_NAME": "es.presencialaboral.dataprocontrol"
-    },
     "cordova-plugin-file": {
       "PACKAGE_NAME": "es.presencialaboral.dataprocontrol"
     }
