@@ -16,10 +16,6 @@
         <param name="onload" value="true" />
     </feature>
     <allow-navigation href="cdvfile:*" />
-    <feature name="FCMPlugin">
-        <param name="android-package" value="com.gae.scaffolder.plugin.FCMPlugin" />
-        <param name="onload" value="true" />
-    </feature>
     <name>Datapro</name>
     <description>
         La solución más competitiva para cumplir el registro de jornada laboral
@@ -46,6 +42,7 @@
     <splash density="port-xhdpi" src="www/res/screen/android/splash-port-xhdpi.png" />
     <splash density="port-xxhdpi" src="www/res/screen/android/splash-port-xxhdpi.png" />
     <splash density="port-xxxhdpi" src="www/res/screen/android/splash-port-xxxhdpi.png" />
+    <resource-file src="platforms/android/google-services.json" target="google-services.json" />
     <access origin="*" />
     <allow-intent href="market:*" />
     <preference name="loglevel" value="DEBUG" />

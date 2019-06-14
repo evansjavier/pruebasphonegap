@@ -233,14 +233,6 @@ module.exports = [
         "merges": [
             "window.FileSystem"
         ]
-    },
-    {
-        "file": "plugins/cordova-plugin-fcm/www/FCMPlugin.js",
-        "id": "cordova-plugin-fcm.FCMPlugin",
-        "pluginId": "cordova-plugin-fcm",
-        "clobbers": [
-            "FCMPlugin"
-        ]
     }
 ];
 module.exports.metadata = 
@@ -251,8 +243,7 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.2.2",
     "cordova-plugin-statusbar": "2.1.3",
     "cordova-plugin-console": "1.0.7",
-    "cordova-plugin-file": "6.0.1",
-    "cordova-plugin-fcm": "2.1.2"
+    "cordova-plugin-file": "6.0.1"
 }
 // BOTTOM OF METADATA
 });

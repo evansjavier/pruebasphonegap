@@ -87,8 +87,7 @@
       "cordova-plugin-network-information": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
-      "cordova-plugin-console": {},
-      "cordova-plugin-fcm": {}
+      "cordova-plugin-console": {}
     }
   }
 }
