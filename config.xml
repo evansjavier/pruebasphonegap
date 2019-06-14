@@ -10,8 +10,8 @@
     <content src="www/dist/index.html" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="phonegap-version" value="cli-8.0.0" />
-    <preference name="android-minSdkVersion" value="26" />
-    <preference name="android-targetSdkVersion" value="16" />
+    <preference name="android-minSdkVersion" value="19" />
+    <preference name="android-targetSdkVersion" value="25" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarStyle" value="blacktranslucent" />
     <platform name="ios">
