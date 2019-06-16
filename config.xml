@@ -9,7 +9,6 @@
     </author>
     <content src="www/dist/index.html" />
     <preference name="phonegap-version" value="cli-8.0.0" />
-    <engine name="ios" spec="^4.5.3" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="26" />
     <preference name="StatusBarOverlaysWebView" value="false" />
