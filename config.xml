@@ -8,12 +8,15 @@
         Datapro Legal
     </author>
     <content src="www/dist/index.html" />
-    <preference name="DisallowOverscroll" value="true" />
     <preference name="phonegap-version" value="cli-8.0.0" />
+    <engine name="ios" spec="^4.5.3" />
+    <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="26" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarStyle" value="blacktranslucent" />
     <platform name="ios">
+        <preference name="Orientation" value="all" />
+        <preference name="AutoHideSplashScreen" value="false" />
         <icon height="1024" src="www/res/icon/ios/icon-1024.png" width="1024" />
         <icon height="29" src="www/res/icon/ios/icon-small.png" width="29" />
         <icon height="58" src="www/res/icon/ios/icon-small@2x.png" width="58" />
